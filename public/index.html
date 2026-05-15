@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LIA — Líder Inteligente de Atendimento | AE Alugue Estética</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:       #0a0f1a;
+      --bg2:      #0d1520;
+      --cyan:     #00d4ff;
+      --purple:   #8b5cf6;
+      --orange:   #ff6b35;
+      --white:    #ffffff;
+      --gray:     #94a3b8;
+      --card:     rgba(255,255,255,0.04);
+      --border:   rgba(0,212,255,0.15);
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      padding: 80px 8%;
+      background: radial-gradient(ellipse at 20% 50%, rgba(0,212,255,0.07) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.08) 0%, transparent 60%);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid var(--border);
+      color: var(--cyan);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: clamp(64px, 8vw, 100px);
+      font-weight: 900;
+      color: var(--cyan);
+      line-height: 1;
+      margin-bottom: 12px;
+      text-shadow: 0 0 40px rgba(0,212,255,0.4);
+    }
+
+    .hero h2 {
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      color: #000;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity .2s, transform .2s;
+    }
+    .btn-primary:hover { opacity: .85; transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cyan);
+      border: 1.5px solid var(--cyan);
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .btn-outline:hover { background: rgba(0,212,255,0.08); }
+
+    .hero-metrics {
+      display: flex;
+      gap: 40px;
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .metric-value {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--cyan);
+    }
+    .metric-label { font-size: 12px; color: var(--gray); margin-top: 4px; }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chat-mockup {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      width: 100%;
+      max-width: 400px;
+      backdrop-filter: blur(10px);
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .chat-avatar {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; font-size: 16px; color: #000;
+    }
+
+    .chat-name { font-weight: 700; font-size: 15px; }
+    .chat-status { font-size: 12px; color: #22c55e; }
+
+    .msg { margin-bottom: 12px; }
+
+    .msg-lia {
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.15);
+      border-radius: 0 12px 12px 12px;
+      padding: 10px 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 85%;
+      color: var(--white);
+    }
+
+    .msg-lead {
+      background: rgba(139,92,246,0.15);
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 12px 12px 0 12px;
+      padding: 10px 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 85%;
+      margin-left: auto;
+      color: var(--white);
+    }
+
+    .msg-time { font-size: 10px; color: var(--gray); margin-top: 4px; text-align: right; }
+
+    /* ── SEÇÕES ── */
+    section { padding: 100px 8%; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 18px;
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto 60px;
+    }
+
+    .text-center { text-align: center; }
+
+    /* ── PROBLEMA ── */
+    .problema { background: var(--bg2); }
+
+    .problema .section-tag { color: var(--orange); }
+    .problema .section-title { color: var(--orange); }
+
+    .problema-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .problema-card {
+      background: rgba(255,107,53,0.06);
+      border: 1px solid rgba(255,107,53,0.2);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .problema-icon { font-size: 40px; margin-bottom: 16px; }
+    .problema-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: var(--orange); }
+    .problema-card p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+    /* ── SOLUÇÃO ── */
+    .solucao .section-tag { color: var(--cyan); }
+    .solucao .section-title { color: var(--cyan); }
+
+    .solucao-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 60px;
+    }
+
+    .feature-list { display: flex; flex-direction: column; gap: 28px; }
+
+    .feature-item { display: flex; gap: 16px; align-items: flex-start; }
+
+    .feature-icon {
+      width: 44px; height: 44px; min-width: 44px;
+      background: rgba(0,212,255,0.1);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+
+    .feature-item h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .feature-item p { font-size: 14px; color: var(--gray); line-height: 1.5; }
+
+    .funil {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+    }
+
+    .funil-title { font-size: 14px; font-weight: 700; color: var(--cyan); margin-bottom: 24px; letter-spacing: 1px; text-transform: uppercase; }
+
+    .funil-step {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .funil-step:last-child { border-bottom: none; }
+
+    .funil-num {
+      width: 32px; height: 32px; min-width: 32px;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 900; color: #000;
+    }
+
+    .funil-step-text { font-size: 14px; color: var(--gray); }
+    .funil-step-text strong { color: var(--white); display: block; margin-bottom: 2px; }
+
+    /* ── ARQUITETURA ── */
+    .arquitetura { background: var(--bg2); }
+    .arquitetura .section-tag { color: var(--purple); }
+    .arquitetura .section-title { color: var(--white); }
+
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin: 60px 0;
+      flex-wrap: wrap;
+    }
+
+    .arch-node {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      min-width: 130px;
+    }
+
+    .arch-icon { font-size: 32px; margin-bottom: 10px; }
+    .arch-label { font-size: 13px; font-weight: 700; color: var(--white); }
+    .arch-sub { font-size: 11px; color: var(--gray); margin-top: 4px; }
+
+    .arch-arrow {
+      font-size: 24px;
+      color: var(--cyan);
+      padding: 0 8px;
+      opacity: 0.6;
+    }
+
+    .arch-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .arch-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .arch-card .icon { font-size: 28px; margin-bottom: 12px; }
+    .arch-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+    .arch-card p { font-size: 12px; color: var(--gray); }
+
+    /* ── MÉTRICAS ── */
+    .metricas { }
+    .metricas .section-tag { color: var(--cyan); }
+
+    .metricas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .metrica-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: border-color .3s, transform .3s;
+    }
+    .metrica-card:hover { border-color: var(--cyan); transform: translateY(-4px); }
+
+    .metrica-num {
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--cyan);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .metrica-label { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .metrica-desc { font-size: 13px; color: var(--gray); }
+
+    /* ── CTA ── */
+    .cta {
+      background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.08) 0%, transparent 70%);
+      text-align: center;
+    }
+
+    .cta .section-title { color: var(--white); }
+    .cta .section-title span { color: var(--cyan); }
+    .cta p { color: var(--gray); font-size: 18px; margin-bottom: 40px; }
+
+    .cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 32px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer .logo { font-size: 22px; font-weight: 900; color: var(--cyan); }
+    footer p { font-size: 13px; color: var(--gray); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding: 60px 6%; }
+      .hero-visual { display: none; }
+      .problema-grid { grid-template-columns: 1fr; }
+      .solucao-grid { grid-template-columns: 1fr; }
+      .arch-cards { grid-template-columns: repeat(2, 1fr); }
+      .metricas-grid { grid-template-columns: 1fr; }
+      .arch-flow { gap: 8px; }
+      .arch-arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">✦ AE Alugue Estética · IA de Vendas</div>
+    <h1>LIA</h1>
+    <h2>Líder Inteligente de Atendimento</h2>
+    <p>
+      A IA que responde leads da AE Alugue Estética em segundos via WhatsApp,
+      qualifica automaticamente e entrega o prospecto pronto para o consultor fechar.
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/5517981048195?text=Ol%C3%A1!%20Tenho%20interesse%20em%20saber%20mais%20sobre%20a%20franquia%20AE%20Alugue%20Est%C3%A9tica%20%F0%9F%98%8A" target="_blank" class="btn-primary">
+        Falar com a Lia →
+      </a>
+      <a href="#solucao" class="btn-outline">Saiba Mais</a>
+    </div>
+    <div class="hero-metrics">
+      <div>
+        <div class="metric-value">&lt;30s</div>
+        <div class="metric-label">Tempo de resposta</div>
+      </div>
+      <div>
+        <div class="metric-value">24/7</div>
+        <div class="metric-label">Disponibilidade</div>
+      </div>
+      <div>
+        <div class="metric-value">6</div>
+        <div class="metric-label">Etapas de qualificação</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="chat-mockup">
+      <div class="chat-header">
+        <div class="chat-avatar">L</div>
+        <div>
+          <div class="chat-name">Lia · AE Alugue Estética</div>
+          <div class="chat-status">● online agora</div>
+        </div>
+      </div>
+
+      <div class="msg">
+        <div class="msg-lead">Olá! Tenho interesse em saber mais sobre a franquia 😊</div>
+        <div class="msg-time">10:00</div>
+      </div>
+
+      <div class="msg">
+        <div class="msg-lia">Oi! 😊 Sou a Lia, da equipe de expansão da AE Alugue Estética. Que ótimo que você tem interesse em abrir uma franquia!<br><br>Posso te fazer algumas perguntinhas rápidas pra entender o que faz sentido pra você?<br><br>Primeiro, qual seu nome?</div>
+        <div class="msg-time">10:00 ✓✓</div>
+      </div>
+
+      <div class="msg">
+        <div class="msg-lead">Me chamo Carlos!</div>
+        <div class="msg-time">10:01</div>
+      </div>
+
+      <div class="msg">
+        <div class="msg-lia">Que prazer, Carlos! 🙌 Me conta — o que te motivou a buscar uma oportunidade agora? Teve algum momento específico?</div>
+        <div class="msg-time">10:01 ✓✓</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PROBLEMA ═══════════════════════ -->
+<section class="problema text-center">
+  <div class="section-tag">⚠ O Problema Real</div>
+  <h2 class="section-title">Leads esfriando entre o cadastro<br>e o contato humano</h2>
+  <p class="section-sub">Cada minuto sem resposta é uma franquia que o concorrente está vendendo</p>
+
+  <div class="problema-grid">
+    <div class="problema-card">
+      <div class="problema-icon">⏱</div>
+      <h3>Resposta Lenta</h3>
+      <p>O lead preenche o formulário animado. Quando o consultor liga — horas ou dias depois — o entusiasmo já passou. A janela de conversão fechou.</p>
+    </div>
+    <div class="problema-card">
+      <div class="problema-icon">🌡️</div>
+      <h3>Lead Esfriando</h3>
+      <p>Sem nutrição imediata, o interesse cai. O lead começa a pesquisar outras franquias, comparar opções e o seu território vai embora junto.</p>
+    </div>
+    <div class="problema-card">
+      <div class="problema-icon">📋</div>
+      <h3>Consultor Sobrecarregado</h3>
+      <p>O time de vendas gasta tempo qualificando leads frios em vez de fechar com os quentes. Energia desperdiçada, metas comprometidas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SOLUÇÃO ═══════════════════════ -->
+<section class="solucao" id="solucao">
+  <div class="text-center">
+    <div class="section-tag">✦ A Solução</div>
+    <h2 class="section-title">LIA: IA humanizada que<br>aquece e qualifica em tempo real</h2>
+    <p class="section-sub">Enquanto o consultor dorme, a Lia está trabalhando</p>
+  </div>
+
+  <div class="solucao-grid">
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-icon">⚡</div>
+        <div>
+          <h4>Resposta em menos de 30 segundos</h4>
+          <p>O lead manda mensagem e a Lia responde na hora — com personalidade, calor humano e contexto da AE Alugue Estética.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🧠</div>
+        <div>
+          <h4>IA com personalidade de vendedora</h4>
+          <p>Powered by Claude Sonnet 4 (Anthropic). A Lia usa técnicas avançadas de vendas: linguagem assumptiva, storytelling, gestão de objeções.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📎</div>
+        <div>
+          <h4>Envio automático de materiais</h4>
+          <p>No momento certo, a Lia envia a apresentação da franquia, o plano de negócios e a COF — tudo pelo WhatsApp, sem intervenção humana.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🤝</div>
+        <div>
+          <h4>Handoff inteligente para o consultor</h4>
+          <p>Quando o lead está quente, a Lia transfere para o especialista humano com um resumo completo da conversa. Consultor entra na hora certa.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="funil">
+      <div class="funil-title">Funil de 6 Etapas</div>
+      <div class="funil-step">
+        <div class="funil-num">1</div>
+        <div class="funil-step-text"><strong>Acolhimento</strong>Apresentação calorosa, coleta do nome</div>
+      </div>
+      <div class="funil-step">
+        <div class="funil-num">2</div>
+        <div class="funil-step-text"><strong>Diagnóstico</strong>Entende motivação, situação e sonho do lead</div>
+      </div>
+      <div class="funil-step">
+        <div class="funil-num">3</div>
+        <div class="funil-step-text"><strong>Apresentação do Sonho</strong>Pinta o futuro como franqueado AE</div>
+      </div>
+      <div class="funil-step">
+        <div class="funil-num">4</div>
+        <div class="funil-step-text"><strong>Envio de Materiais</strong>PDF de apresentação, plano e COF</div>
+      </div>
+      <div class="funil-step">
+        <div class="funil-num">5</div>
+        <div class="funil-step-text"><strong>Gestão de Objeções</strong>Trata dúvidas com empatia e dados reais</div>
+      </div>
+      <div class="funil-step">
+        <div class="funil-num">6</div>
+        <div class="funil-step-text"><strong>Handoff ao Especialista</strong>Lead quente + resumo completo da conversa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ ARQUITETURA ═══════════════════════ -->
+<section class="arquitetura text-center">
+  <div class="section-tag" style="color:var(--purple)">⚙ Infraestrutura</div>
+  <h2 class="section-title">Arquitetura robusta,<br>100% em nuvem</h2>
+  <p class="section-sub">Sem servidor local. Sem manutenção manual. Sempre no ar.</p>
+
+  <div class="arch-flow">
+    <div class="arch-node">
+      <div class="arch-icon">👤</div>
+      <div class="arch-label">Lead</div>
+      <div class="arch-sub">WhatsApp</div>
+    </div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-node" style="border-color:rgba(0,212,255,0.4)">
+      <div class="arch-icon">📱</div>
+      <div class="arch-label">Z-API</div>
+      <div class="arch-sub">Gateway WhatsApp</div>
+    </div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-node" style="border-color:rgba(139,92,246,0.5); background:rgba(139,92,246,0.08)">
+      <div class="arch-icon">🤖</div>
+      <div class="arch-label">LIA</div>
+      <div class="arch-sub">Railway · Node.js</div>
+    </div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-node" style="border-color:rgba(0,212,255,0.4)">
+      <div class="arch-icon">🧠</div>
+      <div class="arch-label">Claude Sonnet 4</div>
+      <div class="arch-sub">Anthropic API</div>
+    </div>
+    <div class="arch-arrow">→</div>
+    <div class="arch-node">
+      <div class="arch-icon">💬</div>
+      <div class="arch-label">Resposta</div>
+      <div class="arch-sub">Automática</div>
+    </div>
+  </div>
+
+  <div class="arch-cards">
+    <div class="arch-card">
+      <div class="icon">☁️</div>
+      <h4>Railway</h4>
+      <p>Hospedagem em nuvem com deploy automático via GitHub</p>
+    </div>
+    <div class="arch-card">
+      <div class="icon">🔗</div>
+      <h4>Z-API</h4>
+      <p>Integração oficial WhatsApp Business com webhook em tempo real</p>
+    </div>
+    <div class="arch-card">
+      <div class="icon">🤖</div>
+      <h4>Claude Sonnet 4</h4>
+      <p>Modelo de linguagem Anthropic — estado da arte em IA conversacional</p>
+    </div>
+    <div class="arch-card">
+      <div class="icon">🔄</div>
+      <h4>CI/CD Automático</h4>
+      <p>Atualizações de prompt e código sem downtime via GitHub</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ MÉTRICAS ═══════════════════════ -->
+<section class="metricas text-center">
+  <div class="section-tag">📊 Impacto</div>
+  <h2 class="section-title" style="color:var(--white)">O que muda com a LIA</h2>
+  <p class="section-sub">Números que mostram a diferença entre atender e encantar</p>
+
+  <div class="metricas-grid">
+    <div class="metrica-card">
+      <div class="metrica-num">&lt;30s</div>
+      <div class="metrica-label">Tempo de primeira resposta</div>
+      <div class="metrica-desc">Antes: horas ou dias. Com a Lia: segundos, 24 horas por dia.</div>
+    </div>
+    <div class="metrica-card">
+      <div class="metrica-num">24/7</div>
+      <div class="metrica-label">Disponibilidade total</div>
+      <div class="metrica-desc">Final de semana, feriado, madrugada. A Lia não tira férias.</div>
+    </div>
+    <div class="metrica-card">
+      <div class="metrica-num">100%</div>
+      <div class="metrica-label">Leads respondidos</div>
+      <div class="metrica-desc">Nenhum lead fica sem resposta. Nenhuma oportunidade desperdiçada.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CTA ═══════════════════════ -->
+<section class="cta">
+  <h2 class="section-title">Pronto para ver a <span>LIA</span> em ação?</h2>
+  <p>Mande uma mensagem agora e experimente a experiência do seu lead</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/5517981048195?text=Ol%C3%A1!%20Tenho%20interesse%20em%20saber%20mais%20sobre%20a%20franquia%20AE%20Alugue%20Est%C3%A9tica%20%F0%9F%98%8A" target="_blank" class="btn-primary">
+      💬 Falar com a Lia agora
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="logo">LIA</div>
+  <p>Desenvolvido por ZafalaoTech · Powered by Anthropic Claude Sonnet 4</p>
+  <p style="color:var(--gray); font-size:12px">AE Alugue Estética · 2026</p>
+</footer>
+
+</body>
+</html>
