@@ -55,6 +55,58 @@ async function sendDocument(phone, fileUrl, fileName, caption = '') {
   }
 }
 
+// Envia imagem via URL pública
+async function sendImage(phone, imageUrl, caption = '') {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/send-image`,
+      { phone, image: imageUrl, caption },
+      { headers }
+    );
+    console.log(`[Z-API] Imagem enviada para ${phone}`);
+    return response.data;
+  } catch (error) {
+    console.error(`[Z-API] Erro ao enviar imagem:`, error.response?.data || error.message);
+    throw error;
+  }
+}
+
+// Envia áudio via URL pública (converte para base64 internamente)
+async function sendAudio(phone, audioUrl) {
+  try {
+    const audioResponse = await axios.get(audioUrl, { responseType: 'arraybuffer' });
+    const audioType = audioResponse.headers['content-type'];
+    const audioBase64 = `data:${audioType};base64,${Buffer.from(audioResponse.data, 'binary').toString('base64')}`;
+
+    const response = await axios.post(
+      `${BASE_URL}/send-audio`,
+      { phone, audio: audioBase64 },
+      { headers }
+    );
+    console.log(`[Z-API] Áudio enviado para ${phone}`);
+    return response.data;
+  } catch (error) {
+    console.error(`[Z-API] Erro ao enviar áudio:`, error.response?.data || error.message);
+    throw error;
+  }
+}
+
+// Envia vídeo via URL pública
+async function sendVideo(phone, videoUrl, caption = '') {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}/send-video`,
+      { phone, video: videoUrl, caption },
+      { headers }
+    );
+    console.log(`[Z-API] Vídeo enviado para ${phone}`);
+    return response.data;
+  } catch (error) {
+    console.error(`[Z-API] Erro ao enviar vídeo:`, error.response?.data || error.message);
+    throw error;
+  }
+}
+
 // Verifica status da conexão WhatsApp
 async function checkConnection() {
   try {
@@ -69,4 +121,4 @@ async function checkConnection() {
   }
 }
 
-module.exports = { sendText, sendDocument, checkConnection };
+module.exports = { sendText, sendDocument, sendImage, sendAudio, sendVideo, checkConnection };

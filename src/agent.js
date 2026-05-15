@@ -3,7 +3,7 @@ require('dotenv').config();
 const Anthropic = require('@anthropic-ai/sdk');
 const { SYSTEM_PROMPT } = require('./prompt');
 const { getHistory, addMessage, getLeadSummary } = require('./memory');
-const { sendText, sendDocument } = require('./zapi');
+const { sendText, sendDocument, sendImage, sendAudio, sendVideo } = require('./zapi');
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
