@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Runbook Operacional — LIA · AE Alugue Estética</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* COVER */
+    .cover {
+      background: #0a0f1a;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px;
+      page-break-after: always;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: rgba(0,212,255,0.15);
+      border: 1px solid rgba(0,212,255,0.3);
+      color: #00d4ff;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      width: fit-content;
+    }
+
+    .cover h1 {
+      font-size: 72px;
+      font-weight: 900;
+      color: #00d4ff;
+      line-height: 1;
+      margin-bottom: 12px;
+      text-shadow: 0 0 40px rgba(0,212,255,0.3);
+    }
+
+    .cover h2 {
+      font-size: 28px;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 48px;
+    }
+
+    .cover-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: #94a3b8;
+      font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 40px;
+      margin-top: auto;
+    }
+
+    .cover-meta strong { color: #fff; }
+
+    /* CONTENT */
+    .content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 40px;
+    }
+
+    /* SECTION */
+    .section {
+      margin-bottom: 56px;
+      page-break-inside: avoid;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .section-num {
+      width: 36px; height: 36px; min-width: 36px;
+      background: #0a0f1a;
+      color: #00d4ff;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 900;
+    }
+
+    .section-header h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    /* BLOCKS */
+    .info-box {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+
+    .warn-box {
+      background: #fff7ed;
+      border-left: 4px solid #f97316;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+
+    .success-box {
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+
+    .danger-box {
+      background: #fff1f2;
+      border-left: 4px solid #ef4444;
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+    }
+
+    .box-title {
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .info-box .box-title { color: #1d4ed8; }
+    .warn-box .box-title { color: #c2410c; }
+    .success-box .box-title { color: #15803d; }
+    .danger-box .box-title { color: #b91c1c; }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 12px; }
+
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+
+    .step-num {
+      width: 28px; height: 28px; min-width: 28px;
+      background: #0a0f1a;
+      color: #00d4ff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 900;
+    }
+
+    .step-body { flex: 1; }
+    .step-title { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+    .step-desc { font-size: 14px; color: #475569; }
+
+    /* CODE */
+    code {
+      background: #1e293b;
+      color: #00d4ff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 20px 24px;
+      border-radius: 10px;
+      margin: 16px 0;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    pre .cyan { color: #00d4ff; }
+    pre .green { color: #86efac; }
+    pre .gray { color: #94a3b8; }
+
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    th {
+      background: #0a0f1a;
+      color: #00d4ff;
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #374151;
+    }
+
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    /* STATUS */
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+
+    .status-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .status-icon { font-size: 28px; margin-bottom: 10px; }
+    .status-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .status-card p { font-size: 13px; color: #64748b; }
+
+    /* CHECKLIST */
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .checklist li {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: #fff; border: 1px solid #e2e8f0;
+      border-radius: 8px; padding: 12px 16px;
+      font-size: 14px;
+    }
+    .checklist li::before {
+      content: '☐';
+      font-size: 18px;
+      color: #94a3b8;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    /* TOC */
+    .toc {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 48px;
+    }
+
+    .toc h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+
+    .toc-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 15px;
+      color: #0f172a;
+    }
+
+    .toc-item:last-child { border-bottom: none; }
+    .toc-num { color: #00d4ff; font-weight: 700; font-size: 13px; width: 24px; }
+
+    p { margin-bottom: 12px; }
+    h3 { font-size: 17px; font-weight: 700; margin: 24px 0 12px; color: #0f172a; }
+
+    @media print {
+      .cover { min-height: auto; padding: 60px; }
+      .content { padding: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ CAPA ══════════ -->
+<div class="cover">
+  <div class="cover-badge">Documento Operacional · Confidencial</div>
+  <h1>LIA</h1>
+  <h2>Runbook Operacional<br>AE Alugue Estética</h2>
+  <div class="cover-meta">
+    <p><strong>Sistema:</strong> Agente de IA para qualificação de leads via WhatsApp</p>
+    <p><strong>Versão:</strong> 1.0 — Maio 2026</p>
+    <p><strong>Desenvolvido por:</strong> ZafalaoTech Consultoria</p>
+    <p><strong>Ambiente:</strong> Produção — Railway Cloud</p>
+  </div>
+</div>
+
+<!-- ══════════ CONTEÚDO ══════════ -->
+<div class="content">
+
+  <!-- ÍNDICE -->
+  <div class="toc">
+    <h3>Índice</h3>
+    <ul class="toc-list">
+      <li class="toc-item"><span class="toc-num">01</span> O que é a LIA e como funciona</li>
+      <li class="toc-item"><span class="toc-num">02</span> Como verificar se está funcionando</li>
+      <li class="toc-item"><span class="toc-num">03</span> A Lia parou de responder — o que fazer</li>
+      <li class="toc-item"><span class="toc-num">04</span> WhatsApp desconectado</li>
+      <li class="toc-item"><span class="toc-num">05</span> Como bloquear um número</li>
+      <li class="toc-item"><span class="toc-num">06</span> Como ver os logs (conversas e erros)</li>
+      <li class="toc-item"><span class="toc-num">07</span> Como atualizar o prompt da Lia</li>
+      <li class="toc-item"><span class="toc-num">08</span> Serviços e acessos</li>
+      <li class="toc-item"><span class="toc-num">09</span> Checklist mensal</li>
+    </ul>
+  </div>
+
+  <!-- 01 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <h2>O que é a LIA e como funciona</h2>
+    </div>
+
+    <p>A <strong>LIA (Líder Inteligente de Atendimento)</strong> é uma inteligência artificial treinada para atender leads da AE Alugue Estética via WhatsApp. Ela responde automaticamente, qualifica o potencial franqueado em 6 etapas e avisa o consultor humano quando o lead está pronto para fechar.</p>
+
+    <div class="status-grid">
+      <div class="status-card">
+        <div class="status-icon">📱</div>
+        <h4>Lead manda mensagem</h4>
+        <p>A Z-API recebe e envia para o servidor da Lia via webhook</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">🤖</div>
+        <h4>Lia processa</h4>
+        <p>O servidor chama a IA da Anthropic (Claude) e gera a resposta</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">💬</div>
+        <h4>Resposta enviada</h4>
+        <p>A Lia responde pelo WhatsApp em menos de 30 segundos</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">🤝</div>
+        <h4>Handoff ao consultor</h4>
+        <p>Quando o lead está quente, a Lia avisa o especialista com resumo completo</p>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="box-title">ℹ Importante</div>
+      A Lia funciona 24 horas por dia, 7 dias por semana — incluindo fins de semana e feriados. O único requisito é que o celular vinculado ao WhatsApp esteja com bateria e conexão de internet.
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <h2>Como verificar se está funcionando</h2>
+    </div>
+
+    <p>Abra o link abaixo no navegador a qualquer momento:</p>
+
+    <pre><span class="cyan">https://ae-agent-production-355d.up.railway.app/health</span></pre>
+
+    <p>A resposta deve ser:</p>
+
+    <pre>{
+  <span class="cyan">"status"</span>: <span class="green">"running"</span>,
+  <span class="cyan">"agent"</span>:  <span class="green">"Lia"</span>,
+  <span class="cyan">"brand"</span>:  <span class="green">"AE Alugue Estética"</span>,
+  <span class="gray">// whatsapp: "open" = conectado | "unknown" = verificar celular</span>
+}</pre>
+
+    <div class="success-box">
+      <div class="box-title">✓ Sistema saudável</div>
+      Se aparecer <code>"status": "running"</code> e <code>"agent": "Lia"</code>, o servidor está no ar e funcionando.
+    </div>
+
+    <div class="warn-box">
+      <div class="box-title">⚠ Atenção</div>
+      Se o link não abrir ou mostrar erro, o servidor pode ter caído. Acesse o painel do Railway e verifique os logs (seção 06 deste documento).
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <h2>A Lia parou de responder — o que fazer</h2>
+    </div>
+
+    <p>Siga esta ordem antes de entrar em pânico:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Verifique o health check</div>
+          <div class="step-desc">Acesse <code>https://ae-agent-production-355d.up.railway.app/health</code>. Se responder, o servidor está no ar.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Verifique o WhatsApp do celular</div>
+          <div class="step-desc">O celular precisa estar ligado e com internet. Veja se o WhatsApp está funcionando normalmente no aparelho.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Verifique a Z-API</div>
+          <div class="step-desc">Acesse <code>app.z-api.io</code> → sua instância → verifique se aparece <strong>Conectada</strong> (ícone verde).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Verifique o webhook na Z-API</div>
+          <div class="step-desc">Z-API → Webhooks → campo "Ao receber" deve conter: <code>https://ae-agent-production-355d.up.railway.app/webhook</code></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="step-title">Veja os logs no Railway</div>
+          <div class="step-desc">Acesse <code>railway.app</code> → projeto ae-agent → Deployments → View logs. Procure mensagens de erro em vermelho.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <div class="step-title">Chame a consultoria</div>
+          <div class="step-desc">Se os passos acima não resolverem, entre em contato com a ZafalaoTech com o print dos logs.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <h2>WhatsApp desconectado</h2>
+    </div>
+
+    <p>O WhatsApp pode desconectar da Z-API se o celular ficar sem bateria, trocar de rede ou for reiniciado. Isso é normal e tem solução simples.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Acesse o painel Z-API</div>
+          <div class="step-desc">Vá em <code>app.z-api.io</code> e entre na sua conta.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Clique na sua instância</div>
+          <div class="step-desc">Deve aparecer o status <strong>Desconectada</strong> ou um QR code.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Escaneie o QR code com o celular</div>
+          <div class="step-desc">No celular: WhatsApp → ⋮ (três pontos) → Dispositivos vinculados → Vincular dispositivo → aponte para o QR code na tela.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Aguarde a confirmação</div>
+          <div class="step-desc">O painel Z-API deve mostrar <strong>Conectada</strong> em verde. A Lia volta a funcionar automaticamente.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="danger-box">
+      <div class="box-title">⚠ Atenção</div>
+      Nunca use o mesmo número em duas instâncias Z-API ao mesmo tempo. Isso causa desconexão imediata.
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <h2>Como bloquear um número</h2>
+    </div>
+
+    <p>Quando um lead já foi atendido por um consultor humano e não deve mais receber resposta automática da Lia, adicione o número à lista de bloqueados.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Acesse o Railway</div>
+          <div class="step-desc">Vá em <code>railway.app</code> → projeto ae-agent → aba <strong>Variables</strong>.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Edite a variável BLOCKED_PHONES</div>
+          <div class="step-desc">Clique nos três pontos ao lado de <code>BLOCKED_PHONES</code> → Edit.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Adicione o número no formato correto</div>
+          <div class="step-desc">Formato: código do país + DDD + número, sem espaços ou símbolos. Separe por vírgula.<br>Exemplo: <code>5511999998888,5517996564035</code></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="step-title">Salve — efeito imediato</div>
+          <div class="step-desc">O Railway faz o redeploy automaticamente. Em cerca de 1 minuto o número já está bloqueado.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="box-title">ℹ Formato do número</div>
+      Brasil: 55 + DDD + número. Exemplo: número <strong>(17) 99656-4035</strong> → <strong>5517996564035</strong>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <h2>Como ver os logs (conversas e erros)</h2>
+    </div>
+
+    <p>Os logs mostram tudo que está acontecendo no servidor em tempo real — mensagens recebidas, respostas enviadas e erros.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="step-title">Acesse o Railway</div>
+          <div class="step-desc">Vá em <code>railway.app</code> e entre na sua conta.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="step-title">Abra o projeto ae-agent</div>
+          <div class="step-desc">Clique no projeto → clique no serviço <strong>ae-agent</strong>.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="step-title">Clique em Deployments → View logs</div>
+          <div class="step-desc">Os logs aparecem em tempo real. Linhas em vermelho são erros.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>O que procurar nos logs</h3>
+    <table>
+      <tr><th>Mensagem no log</th><th>Significado</th></tr>
+      <tr><td><code>[Server] Mensagem de 5511...</code></td><td>Lead enviou mensagem — sendo processada</td></tr>
+      <tr><td><code>[Agent] Processando mensagem...</code></td><td>Claude está gerando resposta</td></tr>
+      <tr><td><code>[Z-API] Mensagem enviada...</code></td><td>Lia respondeu com sucesso</td></tr>
+      <tr><td><code>[Server] Número bloqueado...</code></td><td>Número ignorado (está na lista de bloqueados)</td></tr>
+      <tr><td><code>[Z-API] Erro ao enviar mensagem</code></td><td>Problema ao enviar — verificar WhatsApp/Z-API</td></tr>
+      <tr><td><code>Could not resolve authentication</code></td><td>API Key da Anthropic inválida ou vencida</td></tr>
+    </table>
+  </div>
+
+  <!-- 07 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <h2>Como atualizar o prompt da Lia</h2>
+    </div>
+
+    <p>O comportamento da Lia — o que ela fala, como responde objeções, quais informações usa — é controlado pelo arquivo <code>src/prompt.js</code> no GitHub. Qualquer mudança no arquivo é publicada automaticamente.</p>
+
+    <div class="warn-box">
+      <div class="box-title">⚠ Requer apoio da consultoria</div>
+      A edição do prompt requer conhecimento técnico para não quebrar o comportamento da Lia. Entre em contato com a ZafalaoTech para ajustes de conteúdo, tom de voz ou novos dados do negócio.
+    </div>
+
+    <h3>O que pode ser atualizado no prompt</h3>
+    <table>
+      <tr><th>O que mudar</th><th>Onde fica</th></tr>
+      <tr><td>Preços e investimentos</td><td>Seção INVESTIMENTO no prompt.js</td></tr>
+      <tr><td>Projeções financeiras</td><td>Seção PROJEÇÃO DE FATURAMENTO</td></tr>
+      <tr><td>Equipamentos disponíveis</td><td>Seção EQUIPAMENTOS</td></tr>
+      <tr><td>Tom de voz da Lia</td><td>Seção QUEM É LIA e FILOSOFIA DE VENDA</td></tr>
+      <tr><td>Respostas a objeções</td><td>Seção ETAPA 5 — TRATAMENTO DE OBJEÇÕES</td></tr>
+      <tr><td>Contatos e redes sociais</td><td>Seção INFORMAÇÕES DE CONTATO</td></tr>
+    </table>
+  </div>
+
+  <!-- 08 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <h2>Serviços e acessos</h2>
+    </div>
+
+    <div class="danger-box">
+      <div class="box-title">🔐 Confidencial</div>
+      As credenciais abaixo devem ser guardadas em local seguro. Não compartilhe por e-mail ou mensagem. Em caso de suspeita de vazamento, troque imediatamente a chave afetada.
+    </div>
+
+    <table>
+      <tr><th>Serviço</th><th>URL de Acesso</th><th>Para que serve</th></tr>
+      <tr>
+        <td><strong>Railway</strong></td>
+        <td>railway.app</td>
+        <td>Servidor da Lia — logs, variáveis, deploy</td>
+      </tr>
+      <tr>
+        <td><strong>Z-API</strong></td>
+        <td>app.z-api.io</td>
+        <td>Gateway WhatsApp — webhook, QR code, status</td>
+      </tr>
+      <tr>
+        <td><strong>Anthropic</strong></td>
+        <td>console.anthropic.com</td>
+        <td>API Key do Claude — cobrança e limites</td>
+      </tr>
+      <tr>
+        <td><strong>GitHub</strong></td>
+        <td>github.com/juzafalao/ae-agent</td>
+        <td>Código-fonte — prompt, lógica, atualizações</td>
+      </tr>
+    </table>
+
+    <h3>Variáveis de ambiente (Railway → Variables)</h3>
+    <table>
+      <tr><th>Variável</th><th>O que é</th></tr>
+      <tr><td><code>ANTHROPIC_API_KEY</code></td><td>Chave de acesso à IA (Claude)</td></tr>
+      <tr><td><code>ZAPI_INSTANCE_ID</code></td><td>ID da instância WhatsApp na Z-API</td></tr>
+      <tr><td><code>ZAPI_TOKEN</code></td><td>Token de autenticação Z-API</td></tr>
+      <tr><td><code>ZAPI_CLIENT_TOKEN</code></td><td>Token de segurança Z-API (quando ativo)</td></tr>
+      <tr><td><code>AGENT_NAME</code></td><td>Nome da agente (Lia)</td></tr>
+      <tr><td><code>BRAND_NAME</code></td><td>Nome da marca (AE Alugue Estética)</td></tr>
+      <tr><td><code>SPECIALIST_PHONE</code></td><td>Número do consultor que recebe leads quentes</td></tr>
+      <tr><td><code>SPECIALIST_NAME</code></td><td>Nome do consultor</td></tr>
+      <tr><td><code>BLOCKED_PHONES</code></td><td>Números que a Lia deve ignorar (separados por vírgula)</td></tr>
+    </table>
+  </div>
+
+  <!-- 09 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <h2>Checklist mensal</h2>
+    </div>
+
+    <p>Execute estes itens uma vez por mês para garantir que tudo está funcionando corretamente:</p>
+
+    <ul class="checklist">
+      <li>Acessar o health check e confirmar <code>"status": "running"</code></li>
+      <li>Verificar no Railway se o último deploy foi bem-sucedido (sem erros em vermelho)</li>
+      <li>Verificar no painel Z-API se a instância está <strong>Conectada</strong></li>
+      <li>Enviar uma mensagem de teste para o número da Lia e confirmar resposta</li>
+      <li>Verificar no painel Anthropic (console.anthropic.com) o consumo e saldo da API Key</li>
+      <li>Verificar no painel Z-API o consumo do plano contratado</li>
+      <li>Verificar no Railway se está dentro do limite de horas gratuitas (ou plano pago)</li>
+      <li>Revisar a lista <code>BLOCKED_PHONES</code> e adicionar novos números se necessário</li>
+      <li>Confirmar se os dados de preços e projeções no prompt ainda estão corretos</li>
+    </ul>
+
+    <div class="info-box" style="margin-top:24px">
+      <div class="box-title">ℹ Suporte</div>
+      Para dúvidas, atualizações ou problemas que este runbook não cobrir, entre em contato com a <strong>ZafalaoTech Consultoria</strong> — desenvolvedora e responsável técnica pelo sistema LIA.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
