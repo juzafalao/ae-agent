@@ -34,6 +34,13 @@ app.post('/webhook', async (req, res) => {
     // Z-API envia o número já formatado
     const phone = body.phone;
 
+    // Ignora números bloqueados (leads já em atendimento humano)
+    const blockedPhones = (process.env.BLOCKED_PHONES || '').split(',').map(n => n.trim()).filter(Boolean);
+    if (blockedPhones.includes(phone)) {
+      console.log(`[Server] Número bloqueado ignorado: ${phone}`);
+      return;
+    }
+
     // Extrai o texto — Z-API usa body.text.message para texto simples
     let userMessage = '';
 
