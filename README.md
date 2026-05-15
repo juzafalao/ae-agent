@@ -1,4 +1,4 @@
-# AE Alugue Estética — Agente IA de Vendas (Sofia)
+# AE Alugue Estética — Agente IA de Vendas (Lia)
 
 Agente de vendas via WhatsApp para qualificação e conversão de leads interessados em franquia.
 
