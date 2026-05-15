@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Documentação Técnica — LIA Agent | ZafalaoTech</title>
+<style>
+  :root {
+    --navy: #0A2540;
+    --navy-mid: #0E3460;
+    --cyan: #00C9B1;
+    --cyan-light: #00E5CC;
+    --purple: #6C63FF;
+    --light-bg: #F4F7FB;
+    --white: #FFFFFF;
+    --text: #1A2D45;
+    --text-muted: #5A7A9A;
+    --border: #DDE5EF;
+    --tag-bg: #E8F4FD;
+    --tag-color: #1A6FA0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--light-bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-accent {
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,201,177,0.18) 0%, transparent 70%);
+  }
+
+  .header-inner {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 52px 40px 44px;
+  }
+
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,201,177,0.15);
+    border: 1px solid rgba(0,201,177,0.4);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 18px;
+  }
+
+  .brand-badge span { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; display: inline-block; }
+
+  header h1 {
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+
+  header h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  header p {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+    max-width: 560px;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 28px;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .meta-item .label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .meta-item .value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+  }
+
+  /* ── SECTION ── */
+  section {
+    margin-bottom: 52px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .section-number {
+    width: 28px; height: 28px;
+    background: var(--cyan);
+    color: var(--navy);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .section-label h2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: -0.2px;
+  }
+
+  .divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan) 0%, transparent 60%);
+    margin-bottom: 24px;
+    border-radius: 2px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .card p, .card li {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .card ul {
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .card.accent {
+    border-left: 4px solid var(--cyan);
+    background: linear-gradient(135deg, #F0FFFD 0%, var(--white) 60%);
+  }
+
+  .card.purple-accent {
+    border-left: 4px solid var(--purple);
+    background: linear-gradient(135deg, #F5F4FF 0%, var(--white) 60%);
+  }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  @media (max-width: 680px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    main { padding: 32px 20px 60px; }
+    .header-inner { padding: 36px 20px 32px; }
+    header h1 { font-size: 24px; }
+  }
+
+  /* ── ARCHITECTURE DIAGRAM ── */
+  .arch-diagram {
+    background: var(--navy);
+    border-radius: 14px;
+    padding: 36px 28px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .arch-diagram::before {
+    content: '';
+    position: absolute;
+    bottom: -50px; right: -50px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,201,177,0.12) 0%, transparent 70%);
+  }
+
+  .arch-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .arch-box {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 12px 18px;
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .arch-box.cyan-box {
+    background: rgba(0,201,177,0.15);
+    border-color: rgba(0,201,177,0.5);
+  }
+
+  .arch-box.purple-box {
+    background: rgba(108,99,255,0.2);
+    border-color: rgba(108,99,255,0.5);
+  }
+
+  .arch-box .box-icon { font-size: 20px; margin-bottom: 4px; }
+  .arch-box .box-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255,255,255,0.9);
+  }
+  .arch-box .box-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+
+  .arch-arrow {
+    font-size: 18px;
+    color: var(--cyan);
+    flex-shrink: 0;
+  }
+
+  .arch-section-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  .arch-divider {
+    border: none;
+    border-top: 1px dashed rgba(255,255,255,0.12);
+    margin: 20px 0;
+  }
+
+  /* ── TAG PILLS ── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .tag {
+    background: var(--tag-bg);
+    color: var(--tag-color);
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .tag.cyan { background: rgba(0,201,177,0.12); color: #008F7A; }
+  .tag.purple { background: rgba(108,99,255,0.12); color: #4A43CC; }
+  .tag.navy { background: rgba(10,37,64,0.08); color: var(--navy); }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  thead {
+    background: var(--navy);
+    color: var(--white);
+  }
+
+  thead th {
+    padding: 13px 18px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #F8FBFF; }
+
+  tbody td { padding: 12px 18px; color: var(--text); vertical-align: top; }
+  tbody td:first-child { font-weight: 600; }
+
+  .td-mono {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 12px;
+    background: #F1F5FA;
+    padding: 2px 7px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* ── FLOW STEPS ── */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .flow-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .flow-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 42px;
+    bottom: -12px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--cyan), transparent);
+  }
+
+  .flow-num {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .flow-body {
+    flex: 1;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+
+  .flow-body h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 5px;
+  }
+
+  .flow-body p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .flow-body code {
+    font-family: 'Consolas', monospace;
+    font-size: 12px;
+    background: #F0F4FA;
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: #1A6FA0;
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: rgba(0,201,177,0.08);
+    border: 1px solid rgba(0,201,177,0.3);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: var(--text);
+    margin-top: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .info-box .icon { font-size: 20px; flex-shrink: 0; }
+
+  .warn-box {
+    background: rgba(255,177,0,0.08);
+    border: 1px solid rgba(255,177,0,0.35);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    color: var(--text);
+    margin-top: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 12px;
+  }
+
+  footer strong { color: var(--cyan); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-accent"></div>
+  <div class="header-inner">
+    <div class="brand-badge">
+      <span></span> ZafalaoTech Consultoria
+    </div>
+    <h1>Documentação Técnica<br/><em>LIA Agent — AE Alugue Estética</em></h1>
+    <p>Especificação da arquitetura, fluxo de dados, integrações e infraestrutura do agente de IA WhatsApp para qualificação de leads de franquias.</p>
+    <div class="meta-row">
+      <div class="meta-item">
+        <span class="label">Versão</span>
+        <span class="value">1.0.0</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Data</span>
+        <span class="value">Maio 2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Responsável técnico</span>
+        <span class="value">ZafalaoTech Consultoria</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Cliente</span>
+        <span class="value">AE Alugue Estética</span>
+      </div>
+      <div class="meta-item">
+        <span class="label">Status</span>
+        <span class="value">Produção ativa</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ═══ 1. VISÃO GERAL ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">1</div>
+      <h2>Visão Geral do Sistema</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="card accent">
+      <h3>O que é a LIA?</h3>
+      <p>LIA é uma consultora de expansão de franquias movida por Inteligência Artificial. Ela atende leads no WhatsApp 24h por dia, conduz o funil de qualificação — do acolhimento ao diagnóstico, apresentação do modelo de negócios, envio de materiais e tratamento de objeções — até fazer a passagem para o especialista humano no momento certo do fechamento.</p>
+    </div>
+
+    <div class="grid-2" style="margin-top:16px">
+      <div class="card">
+        <h3>Objetivo principal</h3>
+        <ul>
+          <li>Qualificar leads de franquia 24/7 de forma automatizada</li>
+          <li>Manter conversa natural e humanizada via WhatsApp</li>
+          <li>Enviar materiais (PDFs) no momento certo do funil</li>
+          <li>Notificar especialista humano quando lead está pronto</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Limites intencionais</h3>
+        <ul>
+          <li>LIA <strong>não fecha vendas</strong> — papel do especialista humano</li>
+          <li>Não negocia descontos ou condições de pagamento</li>
+          <li>Não agenda reuniões por conta própria</li>
+          <li>Não discute cláusulas de contrato em detalhe</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 2. ARQUITETURA ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">2</div>
+      <h2>Arquitetura e Fluxo de Dados</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="arch-diagram">
+      <div class="arch-section-title">Camada do usuário final</div>
+      <div class="arch-row">
+        <div class="arch-box">
+          <div class="box-icon">📱</div>
+          <div class="box-label">Lead</div>
+          <div class="box-sub">WhatsApp pessoal</div>
+        </div>
+        <div class="arch-arrow">⇄</div>
+        <div class="arch-box cyan-box">
+          <div class="box-icon">💬</div>
+          <div class="box-label">WhatsApp Business</div>
+          <div class="box-sub">Número da AE</div>
+        </div>
+      </div>
+
+      <hr class="arch-divider"/>
+      <div class="arch-section-title">Gateway WhatsApp</div>
+      <div class="arch-row">
+        <div class="arch-box cyan-box">
+          <div class="box-icon">🔗</div>
+          <div class="box-label">Z-API</div>
+          <div class="box-sub">z-api.io · Gateway SaaS</div>
+        </div>
+        <div class="arch-arrow">⟶</div>
+        <div class="arch-box">
+          <div class="box-icon">🌐</div>
+          <div class="box-label">Webhook POST</div>
+          <div class="box-sub">/webhook</div>
+        </div>
+        <div class="arch-arrow">⟶</div>
+        <div class="arch-box cyan-box">
+          <div class="box-icon">⚙️</div>
+          <div class="box-label">Express Server</div>
+          <div class="box-sub">Node.js · server.js</div>
+        </div>
+      </div>
+
+      <hr class="arch-divider"/>
+      <div class="arch-section-title">Camada de inteligência</div>
+      <div class="arch-row">
+        <div class="arch-box cyan-box">
+          <div class="box-icon">⚙️</div>
+          <div class="box-label">Agent Core</div>
+          <div class="box-sub">agent.js</div>
+        </div>
+        <div class="arch-arrow">⇄</div>
+        <div class="arch-box purple-box">
+          <div class="box-icon">🤖</div>
+          <div class="box-label">Claude API</div>
+          <div class="box-sub">Anthropic · Sonnet 4</div>
+        </div>
+        <div class="arch-arrow">+</div>
+        <div class="arch-box">
+          <div class="box-icon">🧠</div>
+          <div class="box-label">Memória</div>
+          <div class="box-sub">memory.js · 20 msgs</div>
+        </div>
+      </div>
+
+      <hr class="arch-divider"/>
+      <div class="arch-section-title">Infraestrutura de hospedagem</div>
+      <div class="arch-row">
+        <div class="arch-box">
+          <div class="box-icon">🐙</div>
+          <div class="box-label">GitHub</div>
+          <div class="box-sub">juzafalao/ae-agent</div>
+        </div>
+        <div class="arch-arrow">→ CI/CD →</div>
+        <div class="arch-box cyan-box">
+          <div class="box-icon">🚂</div>
+          <div class="box-label">Railway</div>
+          <div class="box-sub">Node.js · Cloud PaaS</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top:20px">
+      <span class="icon">💡</span>
+      <span><strong>Fluxo resumido:</strong> Lead manda mensagem no WhatsApp → Z-API entrega via webhook → Express filtra e processa → Agent chama Claude API com histórico → Claude retorna resposta em texto + tags de ação → Agent envia resposta e executa ações (PDF, notificação).</span>
+    </div>
+  </section>
+
+  <!-- ═══ 3. FLUXO DETALHADO ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">3</div>
+      <h2>Fluxo de Processamento Detalhado</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-body">
+          <h4>Recebimento do webhook (Z-API → Express)</h4>
+          <p>A Z-API faz um <code>POST /webhook</code> em tempo real ao receber mensagem. O servidor responde <code>200 OK</code> imediatamente para evitar reenvios, depois processa de forma assíncrona via <code>setImmediate()</code>.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-body">
+          <h4>Filtragem e validação (server.js)</h4>
+          <p>Descarta: mensagens do próprio bot (<code>fromMe</code>), grupos (<code>isGroup</code>), números bloqueados (<code>BLOCKED_PHONES</code>), tipos não-texto (imagem/áudio/vídeo → envia aviso padrão), e eventos que não sejam <code>ReceivedCallback</code>.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-body">
+          <h4>Gerenciamento de histórico (memory.js)</h4>
+          <p>Busca ou cria o histórico do número (Map em memória). Adiciona a mensagem do usuário. Mantém no máximo 20 mensagens — remove as mais antigas ao ultrapassar o limite.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-body">
+          <h4>Chamada à Claude API (agent.js)</h4>
+          <p>Envia sistema: <code>prompt.js</code> (persona + dados da franquia + fluxo de venda). Envia histórico: últimas 20 mensagens formatadas como <code>user/assistant</code>. Modelo: <code>claude-sonnet-4-20250514</code>. Max tokens: <code>1024</code>.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">5</div>
+        <div class="flow-body">
+          <h4>Parse da resposta e extração de tags</h4>
+          <p>Claude retorna texto com possíveis tags de ação embutidas: <code>[ENVIAR_APRESENTACAO]</code> e <code>[TRANSFERIR_LEAD]</code>. O agent remove as tags do texto final e as executa separadamente.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">6</div>
+        <div class="flow-body">
+          <h4>Envio da resposta (zapi.js)</h4>
+          <p>Texto é dividido em blocos de no máximo 1000 caracteres antes do envio. Múltiplos blocos são enviados em sequência com delay de 500ms para simular digitação humana.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">7</div>
+        <div class="flow-body">
+          <h4>Execução das ações</h4>
+          <p><strong>[ENVIAR_APRESENTACAO]:</strong> Envia 3 PDFs via <code>sendDocument()</code> (Apresentação, Plano de Negócios, COF oficial). <strong>[TRANSFERIR_LEAD]:</strong> Envia WhatsApp ao especialista com resumo da conversa e dados coletados do lead.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 4. COMPONENTES ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">4</div>
+      <h2>Componentes do Código</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Arquivo</th>
+            <th>Responsabilidade</th>
+            <th>Destaques técnicos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-mono">src/server.js</span></td>
+            <td>Ponto de entrada Express. Webhook handler. Health check.</td>
+            <td>Responde 200 antes de processar; filtro BLOCKED_PHONES; <code>setImmediate</code> para não bloquear.</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">src/agent.js</span></td>
+            <td>Orquestra chamada ao Claude, parse de tags, envio de resposta e ações.</td>
+            <td>Regex para extração de tags; split de mensagens longas; delay entre múltiplos envios.</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">src/prompt.js</span></td>
+            <td>Persona completa da LIA, dados da franquia, fluxo de venda em 7 etapas.</td>
+            <td>Prompt do sistema carregado via env vars; não contém dados hardcoded sensíveis.</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">src/memory.js</span></td>
+            <td>Histórico de conversas em memória RAM (Map).</td>
+            <td>Chave = número de telefone; cap de 20 msgs; geração de resumo do lead para handoff.</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">src/zapi.js</span></td>
+            <td>Camada de integração com Z-API (send text, document, image, audio, video, status).</td>
+            <td>Client-Token opcional; conversão base64 para áudio; tratamento de erros com log.</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">.env</span></td>
+            <td>Variáveis de ambiente sensíveis. Nunca commitado ao Git.</td>
+            <td>Todas as credenciais e configurações mutáveis do ambiente.</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">railway.json</span></td>
+            <td>Configuração de deploy no Railway.</td>
+            <td>Força builder <code>NIXPACKS</code>; política de restart em falha; max 3 tentativas.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 5. MODELO DE IA ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">5</div>
+      <h2>Modelo de Inteligência Artificial</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="grid-2">
+      <div class="card accent">
+        <h3>Claude Sonnet 4 (Anthropic)</h3>
+        <ul>
+          <li>ID do modelo: <code>claude-sonnet-4-20250514</code></li>
+          <li>Provider: Anthropic (anthropic.com)</li>
+          <li>SDK: <code>@anthropic-ai/sdk</code></li>
+          <li>Max tokens por resposta: <strong>1.024</strong></li>
+          <li>Tipo de chamada: <strong>Messages API</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Configuração do contexto</h3>
+        <ul>
+          <li>System prompt: persona + negócio completo</li>
+          <li>Histórico: últimas 20 msgs por conversa</li>
+          <li>Contexto mantido em memória RAM</li>
+          <li>Reiniciado apenas ao reiniciar o servidor</li>
+          <li>Lead summary: gerado automaticamente no handoff</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card purple-accent" style="margin-top:16px">
+      <h3>Por que Claude Sonnet 4?</h3>
+      <p>O Claude Sonnet 4 oferece o melhor equilíbrio entre capacidade conversacional e latência para aplicações de tempo real. Sua capacidade de seguir instruções complexas de persona e de manter coerência no funil de vendas ao longo de múltiplas mensagens é superior a modelos mais leves, enquanto sua velocidade de resposta permite uma experiência de chat fluida no WhatsApp.</p>
+    </div>
+
+    <div class="info-box">
+      <span class="icon">🔒</span>
+      <span><strong>Segurança de dados:</strong> Nenhuma conversa é armazenada em disco ou banco de dados. O histórico existe apenas em RAM enquanto o servidor está rodando. Ao reiniciar, o histórico é zerado. Não há PII em logs de produção.</span>
+    </div>
+  </section>
+
+  <!-- ═══ 6. INTEGRAÇÕES ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">6</div>
+      <h2>Integrações Externas</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="grid-2">
+      <div class="card accent">
+        <h3>Z-API (Gateway WhatsApp)</h3>
+        <ul>
+          <li>Tipo: SaaS — instância cloud dedicada</li>
+          <li>Autenticação: Instance ID + Token + Client-Token</li>
+          <li>Webhook configurado para: <code>/webhook</code></li>
+          <li>Mensagens suportadas: texto, documento, imagem, áudio, vídeo</li>
+          <li>Eventos recebidos: <code>ReceivedCallback</code> (mensagens recebidas)</li>
+          <li>Painel: app.z-api.io</li>
+        </ul>
+      </div>
+      <div class="card purple-accent">
+        <h3>Anthropic API</h3>
+        <ul>
+          <li>Tipo: REST API com SDK Node.js oficial</li>
+          <li>Autenticação: API Key via header</li>
+          <li>Endpoint: Messages API (<code>messages.create</code>)</li>
+          <li>Cobrança: por token de entrada + saída</li>
+          <li>Latência típica: 2–4 segundos por resposta</li>
+          <li>Painel: console.anthropic.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3>GitHub (controle de versão + CI/CD)</h3>
+      <p>Repositório: <strong>juzafalao/ae-agent</strong> (privado recomendado). Cada push na branch <code>main</code> dispara automaticamente um novo deploy no Railway via integração nativa GitHub → Railway. Não há pipeline de testes configurado — deploys vão direto para produção.</p>
+      <div class="tags">
+        <span class="tag navy">Branch: main</span>
+        <span class="tag navy">Auto-deploy: sim</span>
+        <span class="tag navy">Zero downtime: sim (Railway rolling)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 7. INFRAESTRUTURA ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">7</div>
+      <h2>Infraestrutura de Hospedagem</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="card accent">
+      <h3>Railway (PaaS — Platform as a Service)</h3>
+      <p>O servidor LIA roda em um container gerenciado pelo Railway. Não há servidor físico ou VPS para administrar — Railway cuida de provisionamento, escalabilidade, certificado SSL e atualizações de runtime automaticamente.</p>
+      <div class="tags" style="margin-top:14px">
+        <span class="tag cyan">Builder: Nixpacks (Node.js)</span>
+        <span class="tag cyan">Porta: dinâmica (injetada por Railway)</span>
+        <span class="tag cyan">SSL: automático (HTTPS)</span>
+        <span class="tag cyan">Restart: automático em falha</span>
+        <span class="tag cyan">Logs: em tempo real via dashboard</span>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:16px">
+      <div class="card">
+        <h3>URLs de produção</h3>
+        <ul>
+          <li><strong>Health check:</strong><br/><code>https://ae-agent-production-355d.up.railway.app/health</code></li>
+          <li style="margin-top:8px"><strong>Webhook Z-API:</strong><br/><code>https://ae-agent-production-355d.up.railway.app/webhook</code></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Variáveis de ambiente</h3>
+        <ul>
+          <li>Gerenciadas via painel Railway → Variables</li>
+          <li>Nunca hardcoded no código</li>
+          <li>Alterações exigem redeploy para surtir efeito</li>
+          <li>BLOCKED_PHONES: lista de números já atendidos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <span class="icon">⚠️</span>
+      <div>
+        <strong>Atenção — memória em RAM:</strong> O histórico de conversas é armazenado apenas em memória RAM. Se o servidor reiniciar (deploy, falha, etc.), todos os históricos são perdidos e as conversas começam do zero. Para persistência permanente, seria necessário adicionar um banco de dados (ex: Redis) — isso pode ser implementado em uma versão futura.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 8. VARIÁVEIS DE AMBIENTE ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">8</div>
+      <h2>Variáveis de Ambiente</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Variável</th>
+            <th>Obrigatória</th>
+            <th>Descrição</th>
+            <th>Onde encontrar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-mono">ANTHROPIC_API_KEY</span></td>
+            <td>Sim</td>
+            <td>Chave de acesso à API Claude (Anthropic)</td>
+            <td>console.anthropic.com → API Keys</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">ZAPI_INSTANCE_ID</span></td>
+            <td>Sim</td>
+            <td>ID da instância Z-API conectada ao WhatsApp</td>
+            <td>app.z-api.io → instância → Credenciais</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">ZAPI_TOKEN</span></td>
+            <td>Sim</td>
+            <td>Token de autenticação da instância Z-API</td>
+            <td>app.z-api.io → instância → Credenciais</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">ZAPI_CLIENT_TOKEN</span></td>
+            <td>Não</td>
+            <td>Token de segurança da conta Z-API (opcional — ativa camada extra de auth)</td>
+            <td>app.z-api.io → Segurança → Token de segurança</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">AGENT_NAME</span></td>
+            <td>Sim</td>
+            <td>Nome da agente (ex: Lia)</td>
+            <td>Definido pelo cliente/consultoria</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">BRAND_NAME</span></td>
+            <td>Sim</td>
+            <td>Nome da marca (ex: AE Alugue Estética)</td>
+            <td>Definido pelo cliente/consultoria</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">SPECIALIST_PHONE</span></td>
+            <td>Sim</td>
+            <td>Número WhatsApp do especialista humano (com DDI, ex: 5511999999999)</td>
+            <td>Definido pelo cliente</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">SPECIALIST_NAME</span></td>
+            <td>Não</td>
+            <td>Nome do especialista para personalizar a mensagem de handoff</td>
+            <td>Definido pelo cliente</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">BLOCKED_PHONES</span></td>
+            <td>Não</td>
+            <td>Números já em atendimento humano — separados por vírgula, ignorados pela LIA</td>
+            <td>Mantido pela equipe da AE</td>
+          </tr>
+          <tr>
+            <td><span class="td-mono">PORT</span></td>
+            <td>Não</td>
+            <td>Porta do servidor (Railway injeta automaticamente — não definir manualmente)</td>
+            <td>Automático (Railway)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ 9. ESCALABILIDADE ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">9</div>
+      <h2>Escalabilidade e Multi-Marca</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="card">
+      <h3>Padrão multi-marca</h3>
+      <p>O sistema foi projetado para replicação: cada nova marca (franquia diferente) é uma cópia independente do projeto com seu próprio <code>.env</code>, <code>src/prompt.js</code> e instância Z-API. Cada instância roda em seu próprio serviço Railway, com deploy autônomo e cobrança separada.</p>
+      <div class="tags" style="margin-top:14px">
+        <span class="tag navy">Sem código compartilhado entre marcas</span>
+        <span class="tag navy">Histórico e credenciais 100% isolados</span>
+        <span class="tag navy">Deploy independente por marca</span>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:16px">
+      <div class="card">
+        <h3>Capacidade atual</h3>
+        <ul>
+          <li>Conversas simultâneas: ilimitadas (assíncrono)</li>
+          <li>Histórico por lead: 20 mensagens em RAM</li>
+          <li>Latência de resposta: ~2–5 segundos</li>
+          <li>Limite Z-API: depende do plano contratado</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Evoluções planejadas</h3>
+        <ul>
+          <li>Persistência de histórico (Redis ou banco SQL)</li>
+          <li>Dashboard de leads em tempo real</li>
+          <li>Pausa automática em horário de pico</li>
+          <li>Integração com CRM (Pipedrive, RD Station)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 10. SEGURANÇA ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">10</div>
+      <h2>Segurança e Boas Práticas</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="grid-2">
+      <div class="card accent">
+        <h3>O que está implementado</h3>
+        <ul>
+          <li>Credenciais apenas em variáveis de ambiente</li>
+          <li><code>.env</code> no <code>.gitignore</code> — nunca vai para o Git</li>
+          <li>HTTPS obrigatório no Railway (SSL automático)</li>
+          <li>Filtro de mensagens do próprio bot (<code>fromMe</code>)</li>
+          <li>Filtro de grupos (<code>isGroup</code>)</li>
+          <li>BLOCKED_PHONES para proteção de leads ativos</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Recomendações adicionais</h3>
+        <ul>
+          <li>Ativar Client-Token na Z-API (segurança extra no webhook)</li>
+          <li>Tornar repositório GitHub privado</li>
+          <li>Rotacionar API Keys periodicamente</li>
+          <li>Adicionar validação de origem do webhook (IP whitelist Z-API)</li>
+          <li>Monitoramento de gastos na Anthropic (budget alerts)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 11. TECNOLOGIAS ═══ -->
+  <section>
+    <div class="section-label">
+      <div class="section-number">11</div>
+      <h2>Stack Tecnológica Completa</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>Runtime</h3>
+        <ul>
+          <li>Node.js 20+ (LTS)</li>
+          <li>CommonJS modules</li>
+          <li>npm para dependências</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Framework</h3>
+        <ul>
+          <li>Express.js 4.x</li>
+          <li>express.json() middleware</li>
+          <li>Roteamento REST simples</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Integrações</h3>
+        <ul>
+          <li>@anthropic-ai/sdk</li>
+          <li>axios (chamadas Z-API)</li>
+          <li>dotenv (env vars)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>WhatsApp</h3>
+        <ul>
+          <li>Z-API (SaaS gateway)</li>
+          <li>WhatsApp Business</li>
+          <li>Webhook + REST API</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>IA</h3>
+        <ul>
+          <li>Claude Sonnet 4 (Anthropic)</li>
+          <li>Messages API</li>
+          <li>System prompt + histórico</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Hospedagem</h3>
+        <ul>
+          <li>Railway (PaaS)</li>
+          <li>GitHub (CI/CD)</li>
+          <li>Nixpacks (build)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Documentação técnica preparada por <strong>ZafalaoTech Consultoria</strong> para AE Alugue Estética · Maio 2026</p>
+  <p style="margin-top:6px; font-size:11px; opacity:0.7">Versão 1.0 — Documento confidencial, de uso interno da AE Alugue Estética.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Proposta de Serviços — ZafalaoTech × AE Alugue Estética</title>
+<style>
+  :root {
+    --navy: #0A2540;
+    --navy-mid: #0E3460;
+    --cyan: #00C9B1;
+    --cyan-light: #00E5CC;
+    --purple: #6C63FF;
+    --light-bg: #F4F7FB;
+    --white: #FFFFFF;
+    --text: #1A2D45;
+    --text-muted: #5A7A9A;
+    --border: #DDE5EF;
+    --green: #00B27A;
+    --orange: #F07A2A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--light-bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 40px;
+  }
+
+  .cover-glow-1 {
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,201,177,0.15) 0%, transparent 70%);
+  }
+
+  .cover-glow-2 {
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
+  }
+
+  .cover-inner {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .confidential-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 40px;
+  }
+
+  .cover h1 {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+
+  .cover h1 .highlight {
+    background: linear-gradient(90deg, var(--cyan), var(--cyan-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cover-subtitle {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    max-width: 500px;
+    margin-bottom: 48px;
+  }
+
+  .cover-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+    border-radius: 2px;
+    margin-bottom: 48px;
+  }
+
+  .parties {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    align-items: center;
+    gap: 0;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 24px 28px;
+    max-width: 600px;
+    margin-bottom: 40px;
+  }
+
+  .party-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 5px;
+  }
+
+  .party-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .party-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .party-connector {
+    text-align: center;
+    font-size: 22px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item .label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 3px;
+  }
+
+  .cover-meta-item .value {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 56px 40px 80px;
+  }
+
+  @media (max-width: 680px) {
+    .cover h1 { font-size: 30px; }
+    main { padding: 36px 20px 60px; }
+    .cover { padding: 40px 24px; }
+    .parties { grid-template-columns: 1fr; gap: 20px; }
+    .party-connector { display: none; }
+  }
+
+  /* ── SECTION ── */
+  section { margin-bottom: 60px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+
+  .section-icon {
+    width: 42px; height: 42px;
+    background: var(--navy);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .section-header h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: -0.3px;
+  }
+
+  .divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan) 0%, transparent 55%);
+    margin: 14px 0 28px;
+    border-radius: 2px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+
+  .card h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card p, .card li {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .card ul { padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+  .card.cyan-border { border-left: 4px solid var(--cyan); }
+  .card.purple-border { border-left: 4px solid var(--purple); }
+  .card.green-border { border-left: 4px solid var(--green); }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* ── DELIVERABLE LIST ── */
+  .deliverable {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .del-check {
+    width: 28px; height: 28px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    color: white;
+    font-weight: 700;
+  }
+
+  .del-body h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .del-body p { font-size: 13px; color: var(--text-muted); }
+
+  /* ── PRICING TABLE ── */
+  .pricing-table {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .pricing-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .pricing-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .pricing-header .tag {
+    background: rgba(0,201,177,0.2);
+    color: var(--cyan);
+    border: 1px solid rgba(0,201,177,0.4);
+    border-radius: 20px;
+    padding: 3px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+  }
+
+  .pricing-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pricing-row:last-of-type { border-bottom: none; }
+
+  .pricing-row .item { font-size: 14px; font-weight: 600; color: var(--text); }
+  .pricing-row .desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .pricing-row .price {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+
+  .pricing-total {
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    padding: 20px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pricing-total .label {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .pricing-total .total-value {
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── EVOLUTION TABLE ── */
+  .evo-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .evo-badge {
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .evo-badge.v2 { background: rgba(0,201,177,0.12); color: #008F7A; }
+  .evo-badge.v3 { background: rgba(108,99,255,0.12); color: #4A43CC; }
+  .evo-badge.v4 { background: rgba(240,122,42,0.12); color: #B85A10; }
+
+  .evo-body h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .evo-body p { font-size: 13px; color: var(--text-muted); }
+
+  .evo-body .price-est {
+    display: inline-block;
+    background: #F4F7FB;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-top: 8px;
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: rgba(0,201,177,0.07);
+    border: 1px solid rgba(0,201,177,0.3);
+    border-radius: 10px;
+    padding: 18px 22px;
+    font-size: 13.5px;
+    color: var(--text);
+    margin-top: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .info-box .icon { font-size: 20px; flex-shrink: 0; }
+
+  /* ── SIGNATURE ── */
+  .signature-block {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 36px;
+  }
+
+  .sig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 32px;
+  }
+
+  @media (max-width: 600px) { .sig-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+  .sig-party { }
+  .sig-party .role {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  .sig-line {
+    border-top: 2px solid var(--border);
+    padding-top: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .sig-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 12px;
+  }
+  footer strong { color: var(--cyan); }
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER PAGE ═══ -->
+<div class="cover">
+  <div class="cover-glow-1"></div>
+  <div class="cover-glow-2"></div>
+  <div class="cover-inner">
+    <div class="confidential-badge">Documento Confidencial</div>
+    <h1>Proposta de<br/>Serviços<br/><span class="highlight">Agente LIA</span></h1>
+    <p class="cover-subtitle">Implantação, manutenção e evolução do agente de IA WhatsApp para qualificação automatizada de leads de franquia.</p>
+    <div class="cover-line"></div>
+    <div class="parties">
+      <div>
+        <div class="party-label">Prestadora de serviços</div>
+        <div class="party-name">ZafalaoTech</div>
+        <div class="party-sub">Consultoria em tecnologia & IA</div>
+      </div>
+      <div class="party-connector">×</div>
+      <div>
+        <div class="party-label">Contratante</div>
+        <div class="party-name">AE Alugue Estética</div>
+        <div class="party-sub">Rede de franquias — Lajeado/RS</div>
+      </div>
+    </div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="label">Data da proposta</div>
+        <div class="value">Maio de 2026</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Validade</div>
+        <div class="value">30 dias</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Versão</div>
+        <div class="value">1.0</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CONTENT ═══ -->
+<main>
+
+  <!-- ── CONTEXTO ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon">🎯</div>
+      <h2>Contexto e Objetivo</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="card cyan-border">
+      <h3>Desafio do cliente</h3>
+      <p>A AE Alugue Estética está em expansão nacional e precisa qualificar um alto volume de leads de franquia que chegam via WhatsApp — muitos fora do horário comercial, muitos em estágio inicial de informação. A equipe de especialistas humanos tem capacidade limitada e precisa focar nos leads quentes, prontos para fechar.</p>
+    </div>
+
+    <div class="card">
+      <h3>Solução implementada</h3>
+      <p>Desenvolvimento e implantação da <strong>LIA</strong> — uma agente de IA que atende leads no WhatsApp 24 horas por dia, conduz o funil completo de qualificação (7 etapas), envia materiais institucionais e passa o lead aquecido para o especialista humano no momento certo, sem nunca tentar fechar a venda por conta própria.</p>
+    </div>
+  </section>
+
+  <!-- ── ENTREGÁVEIS ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon">✅</div>
+      <h2>O Que Foi Entregue (Fase 1)</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="deliverable">
+      <div class="del-check">✓</div>
+      <div class="del-body">
+        <h4>Agente LIA — Persona e Prompt de Vendas</h4>
+        <p>Persona completa com identidade, voz, técnicas de vendas (linguagem assumptiva, amplificação de dor, prova social, micro-comprometimentos, tratamento de objeções). Fluxo em 7 etapas: acolhimento → diagnóstico → sonho → materiais → objeções → qualificação → handoff.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-check">✓</div>
+      <div class="del-body">
+        <h4>Servidor de Webhook (Node.js + Express)</h4>
+        <p>Servidor HTTP que recebe mensagens em tempo real via Z-API, filtra tipos inválidos (grupos, mídia, mensagens próprias, leads bloqueados) e processa de forma assíncrona sem bloquear o webhook.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-check">✓</div>
+      <div class="del-body">
+        <h4>Integração com Claude Sonnet 4 (Anthropic)</h4>
+        <p>Chamada à API do Claude com histórico completo da conversa (últimas 20 mensagens), configuração do sistema de prompt e extração de tags de ação da resposta do modelo.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-check">✓</div>
+      <div class="del-body">
+        <h4>Integração com Z-API (WhatsApp Business)</h4>
+        <p>Envio de texto, documentos (PDF), imagens, áudio e vídeo via Z-API. Health check de conexão WhatsApp. Client-Token opcional com suporte a ativação futura.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-check">✓</div>
+      <div class="del-body">
+        <h4>Sistema de Memória de Conversas</h4>
+        <p>Histórico por lead armazenado em memória RAM, com cap de 20 mensagens. Geração automática de resumo do lead para notificação ao especialista no momento do handoff.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-check">✓</div>
+      <div class="del-body">
+        <h4>Filtro de Leads em Atendimento Humano</h4>
+        <p>Variável <code>BLOCKED_PHONES</code> que impede a LIA de interferir em leads já em negociação com especialistas humanos. Gerenciamento simples pelo painel Railway.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-check">✓</div>
+      <div class="del-body">
+        <h4>Deploy em Produção (Railway)</h4>
+        <p>Servidor rodando em produção com HTTPS automático, CI/CD via GitHub (auto-deploy a cada push), restart automático em falha, e URL pública configurada na Z-API.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-check">✓</div>
+      <div class="del-body">
+        <h4>Documentação Operacional (Runbook)</h4>
+        <p>Guia completo para equipe não-técnica: verificar saúde do sistema, reconectar WhatsApp, bloquear leads, consultar logs, atualizar prompt. Inclui checklist mensal de manutenção.</p>
+      </div>
+    </div>
+
+    <div class="deliverable">
+      <div class="del-check">✓</div>
+      <div class="del-body">
+        <h4>Documentação Técnica Completa</h4>
+        <p>Documento técnico com arquitetura detalhada, fluxo de dados, componentes de código, descrição das integrações, variáveis de ambiente, segurança e escalabilidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INVESTIMENTO ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon">💰</div>
+      <h2>Investimento — Fase 1 (Implantação)</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="pricing-table">
+      <div class="pricing-header">
+        <h3>Desenvolvimento e Implantação</h3>
+        <span class="tag">Pagamento único</span>
+      </div>
+
+      <div class="pricing-row">
+        <div>
+          <div class="item">Arquitetura e desenvolvimento do agente LIA</div>
+          <div class="desc">Servidor Node.js, integrações Z-API + Anthropic, sistema de memória, action tags</div>
+        </div>
+        <div class="price">R$ [———]</div>
+      </div>
+
+      <div class="pricing-row">
+        <div>
+          <div class="item">Prompt de vendas especializado</div>
+          <div class="desc">Persona, técnicas de fechamento, 7 etapas do funil, tratamento de objeções, dados COF</div>
+        </div>
+        <div class="price">R$ [———]</div>
+      </div>
+
+      <div class="pricing-row">
+        <div>
+          <div class="item">Configuração de infraestrutura</div>
+          <div class="desc">Deploy Railway, CI/CD GitHub, variáveis de ambiente, configuração Z-API webhook</div>
+        </div>
+        <div class="price">R$ [———]</div>
+      </div>
+
+      <div class="pricing-row">
+        <div>
+          <div class="item">Testes e validação em produção</div>
+          <div class="desc">Testes de webhook, depuração de erros, ajustes de comportamento da LIA</div>
+        </div>
+        <div class="price">R$ [———]</div>
+      </div>
+
+      <div class="pricing-row">
+        <div>
+          <div class="item">Documentação técnica e operacional</div>
+          <div class="desc">Runbook, documento técnico e proposta profissional</div>
+        </div>
+        <div class="price">R$ [———]</div>
+      </div>
+
+      <div class="pricing-total">
+        <div class="label">Total da Fase 1</div>
+        <div class="total-value">R$ [———]</div>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top:20px">
+      <span class="icon">ℹ️</span>
+      <span>Os valores acima são a ser preenchidos pela ZafalaoTech antes do envio ao cliente. Os custos de infraestrutura (Railway, Z-API, Anthropic API) são pagos diretamente pelo cliente e não estão incluídos.</span>
+    </div>
+  </section>
+
+  <!-- ── MANUTENÇÃO ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon">🔧</div>
+      <h2>Manutenção Mensal (Opcional)</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="pricing-table">
+      <div class="pricing-header">
+        <h3>Plano de Suporte e Manutenção</h3>
+        <span class="tag">Mensalidade</span>
+      </div>
+
+      <div class="pricing-row">
+        <div>
+          <div class="item">Monitoramento de saúde do agente</div>
+          <div class="desc">Verificação periódica do health check, logs Railway, conexão WhatsApp</div>
+        </div>
+        <div class="price">incluso</div>
+      </div>
+
+      <div class="pricing-row">
+        <div>
+          <div class="item">Ajustes de prompt e comportamento</div>
+          <div class="desc">Até 2 revisões mensais do prompt (tom, respostas, novas objeções identificadas)</div>
+        </div>
+        <div class="price">incluso</div>
+      </div>
+
+      <div class="pricing-row">
+        <div>
+          <div class="item">Atualização de lista BLOCKED_PHONES</div>
+          <div class="desc">Inclusão e remoção de números conforme necessidade da equipe</div>
+        </div>
+        <div class="price">incluso</div>
+      </div>
+
+      <div class="pricing-row">
+        <div>
+          <div class="item">Suporte técnico via WhatsApp</div>
+          <div class="desc">Resposta em até 4 horas úteis para incidentes</div>
+        </div>
+        <div class="price">incluso</div>
+      </div>
+
+      <div class="pricing-total">
+        <div class="label">Mensalidade</div>
+        <div class="total-value">R$ [———]</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CUSTOS TERCEIROS ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon">☁️</div>
+      <h2>Custos de Infraestrutura (Responsabilidade do Cliente)</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="grid-2">
+      <div class="card cyan-border">
+        <h3>☁️ Railway (Hospedagem)</h3>
+        <ul>
+          <li>Plano Hobby: ~US$ 5/mês</li>
+          <li>Plano Pro: ~US$ 20/mês (recomendado)</li>
+          <li>Cobrança em dólar no cartão</li>
+          <li>railway.app</li>
+        </ul>
+      </div>
+      <div class="card purple-border">
+        <h3>🤖 Anthropic API (Claude)</h3>
+        <ul>
+          <li>Claude Sonnet 4: ~US$ 3/1M tokens entrada</li>
+          <li>Custo varia com volume de conversas</li>
+          <li>Estimativa: US$ 10–30/mês para volume médio</li>
+          <li>console.anthropic.com</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>💬 Z-API (Gateway WhatsApp)</h3>
+        <ul>
+          <li>Plano Basic: ~R$ 69/mês por instância</li>
+          <li>1 instância = 1 número WhatsApp</li>
+          <li>app.z-api.io</li>
+        </ul>
+      </div>
+      <div class="card green-border">
+        <h3>🐙 GitHub</h3>
+        <ul>
+          <li>Plano Free (repositórios privados: grátis)</li>
+          <li>Ou Team: US$ 4/usuário/mês</li>
+          <li>Recomendado: repositório privado</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EVOLUÇÕES ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon">🚀</div>
+      <h2>Evoluções Futuras (Roadmap)</h2>
+    </div>
+    <div class="divider"></div>
+
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:24px;">As funcionalidades abaixo são evoluções planejadas, a serem desenvolvidas em fases subsequentes conforme aprovação e necessidade do cliente.</p>
+
+    <div class="evo-item">
+      <div class="evo-badge v2">v2.0</div>
+      <div class="evo-body">
+        <h4>Persistência de histórico (Redis ou banco SQL)</h4>
+        <p>Atualmente o histórico de conversas vive na RAM e é perdido ao reiniciar o servidor. Com banco de dados, cada lead manteria seu histórico completo mesmo após reinicializações, permitindo continuidade perfeita de conversas longas.</p>
+        <span class="price-est">Estimativa: consultar</span>
+      </div>
+    </div>
+
+    <div class="evo-item">
+      <div class="evo-badge v2">v2.0</div>
+      <div class="evo-body">
+        <h4>Dashboard de leads em tempo real</h4>
+        <p>Interface web para visualizar leads ativos, status do funil, volume de conversas, taxa de handoff, e histórico de cada conversa. Com autenticação para acesso da equipe de expansão.</p>
+        <span class="price-est">Estimativa: consultar</span>
+      </div>
+    </div>
+
+    <div class="evo-item">
+      <div class="evo-badge v2">v2.0</div>
+      <div class="evo-body">
+        <h4>Integração com CRM (Pipedrive / RD Station)</h4>
+        <p>Ao identificar um lead qualificado, a LIA cria automaticamente o deal no CRM com todos os dados coletados (nome, cidade, capital disponível, prazo), eliminando trabalho manual da equipe.</p>
+        <span class="price-est">Estimativa: consultar</span>
+      </div>
+    </div>
+
+    <div class="evo-item">
+      <div class="evo-badge v3">v3.0</div>
+      <div class="evo-body">
+        <h4>Follow-up automático para leads frios</h4>
+        <p>Sistema que detecta leads que pararam de responder há mais de X horas e dispara mensagens de reativação automaticamente, com gatilhos de curiosidade e urgência personalizados conforme o estágio do funil.</p>
+        <span class="price-est">Estimativa: consultar</span>
+      </div>
+    </div>
+
+    <div class="evo-item">
+      <div class="evo-badge v3">v3.0</div>
+      <div class="evo-body">
+        <h4>Multi-canal (Instagram DM + E-mail)</h4>
+        <p>Expansão da LIA para atender leads que chegam pelo Instagram Direct Messages e por e-mail, com unificação de histórico por lead independente do canal de entrada.</p>
+        <span class="price-est">Estimativa: consultar</span>
+      </div>
+    </div>
+
+    <div class="evo-item">
+      <div class="evo-badge v4">v4.0</div>
+      <div class="evo-body">
+        <h4>Expansão multi-marca (rede ZafalaoTech)</h4>
+        <p>Painel centralizado para gerenciar múltiplos agentes de diferentes marcas (franquias diferentes) a partir de um único dashboard, com relatórios consolidados e gestão de credenciais simplificada.</p>
+        <span class="price-est">Estimativa: consultar</span>
+      </div>
+    </div>
+
+    <div class="evo-item">
+      <div class="evo-badge v4">v4.0</div>
+      <div class="evo-body">
+        <h4>Análise de sentimento e scoring automático</h4>
+        <p>Análise em tempo real do sentimento do lead ao longo da conversa para calcular um score de propensão ao fechamento. Leads com score alto são priorizados na fila do especialista.</p>
+        <span class="price-est">Estimativa: consultar</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONDIÇÕES ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <h2>Condições Gerais</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>📅 Prazo</h3>
+        <ul>
+          <li>Fase 1 já entregue e em produção</li>
+          <li>Evoluções com prazo a combinar por etapa</li>
+          <li>Cronograma detalhado mediante aprovação</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>💳 Pagamento</h3>
+        <ul>
+          <li>Fase 1: pagamento único (a combinar)</li>
+          <li>Manutenção: mensalidade recorrente</li>
+          <li>Evoluções: por etapa aprovada</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🔐 Propriedade do código</h3>
+        <ul>
+          <li>Código-fonte entregue ao cliente</li>
+          <li>Repositório GitHub transferível</li>
+          <li>Documentação completa inclusa</li>
+          <li>Cliente pode contratar outro técnico</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📞 Suporte</h3>
+        <ul>
+          <li>WhatsApp: horário comercial</li>
+          <li>Incidentes críticos: até 4h úteis</li>
+          <li>Ajustes de prompt: até 2 dias úteis</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top: 6px">
+      <span class="icon">💡</span>
+      <span><strong>Recomendação sobre GitHub:</strong> Para garantir a continuidade do negócio, recomendamos criar uma conta GitHub corporativa para a AE Alugue Estética e transferir o repositório para ela. Assim, o código fica sob controle total do cliente e qualquer técnico pode dar continuidade ao projeto no futuro.</span>
+    </div>
+  </section>
+
+  <!-- ── ASSINATURA ── -->
+  <section>
+    <div class="section-header">
+      <div class="section-icon">✍️</div>
+      <h2>Aceite da Proposta</h2>
+    </div>
+    <div class="divider"></div>
+
+    <div class="signature-block">
+      <p style="font-size: 14px; color: var(--text-muted);">Ao assinar este documento, o contratante declara ciência e concordância com o escopo, valores e condições descritos nesta proposta.</p>
+      <div class="sig-grid">
+        <div class="sig-party">
+          <div class="role">Prestadora de Serviços</div>
+          <div class="sig-line">Juliana Zafalao</div>
+          <div class="sig-sub">ZafalaoTech Consultoria</div>
+          <div class="sig-sub" style="margin-top:4px">Data: ____/____/______</div>
+        </div>
+        <div class="sig-party">
+          <div class="role">Contratante</div>
+          <div class="sig-line">_________________________________</div>
+          <div class="sig-sub">AE Alugue Estética</div>
+          <div class="sig-sub" style="margin-top:4px">Data: ____/____/______</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Proposta preparada por <strong>ZafalaoTech Consultoria</strong> para AE Alugue Estética · Maio 2026</p>
+  <p style="margin-top:6px; font-size:11px; opacity:0.7">Documento confidencial — não compartilhar sem autorização.</p>
+</footer>
+
+</body>
+</html>
