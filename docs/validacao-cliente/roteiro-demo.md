@@ -3,7 +3,7 @@
 Princípio: mostrar só o que o código comprovadamente faz. Este código é um **agente conversacional de qualificação de leads no WhatsApp**, não a plataforma que o Camillo descreveu. A demo deve deixar isso claro e posicionar a Fase 1.
 
 ## Antes da reunião (checklist, 30 min antes)
-- [ ] Confirmar que o modelo `claude-sonnet-4-20250514` (`src/agent.js:96`) ainda responde e que a conta tem crédito. **Não verificado nesta análise.**
+- [ ] **BLOQUEANTE:** o modelo `claude-sonnet-4-20250514` (`src/agent.js:96`) consta como aposentado em 15/06/2026. Sem trocar o modelo (por exemplo para `claude-sonnet-5-5`) e testar, a Lia responde só "problema técnico". Confirmar também o crédito da conta.
 - [ ] Usar instância Z-API e celular de teste. **Não** usar a produção.
 - [ ] **Não** provocar o envio de materiais. As URLs são placeholder (`src/agent.js:14,19,24`) e o lead receberia "Materiais enviados!" sem os arquivos (`src/agent.js:66`).
 - [ ] Mandar uma mensagem por vez e esperar a resposta (não há fila por telefone, `src/server.js:78`).

@@ -2,6 +2,9 @@
 
 Não existe banco de dados (`src/memory.js:2-4`, sem driver em `package.json:10-15`). As chamadas externas são a Anthropic e a Z-API.
 
+## 🔴 Risco nº 1: modelo de IA aposentado
+`src/agent.js:96` usa `claude-sonnet-4-20250514`. A referência de modelos da Anthropic (cache de 2026-11-03) lista esse modelo como **aposentado em 15/06/2026**. Se isso valer, **toda** chamada à IA falha, o lead recebe "Desculpe, tive um problema técnico" (`src/agent.js:140-142`) e o log mostra só `error.message` (`src/agent.js:139`). Em resumo, **a demo não funciona** sem trocar o modelo, por exemplo para `claude-sonnet-5-5`, e testar de novo. Não confirmei ao vivo (regra: não chamar API).
+
 ## Inventário de chamadas
 
 | Chamada | Onde | Timeout | Retry | Fallback | Log na falha | Mensagem ao usuário na falha |
